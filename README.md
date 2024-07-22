@@ -3,15 +3,22 @@ Polyploidization has been recognized as a major force in plant evolution. With t
 
 # 1.Pairwise comparison of LTR-RT sequences for octoploid strawberry (_Fragaria × ananassa_)
 #We recommended using LTR_retriever pipeline. The commands are listed as below. Merge multiple genome in a single file to explore the clusters of their chromosomes together.
+
   nohup gt suffixerator -db Fananassa.genome.fa -indexname Fananassa.genome.fa -tis -suf -lcp -des -ssp -sds -dna &
+
   nohup ltr_finder -D 15000 -d 1000 -L 7000 -l 100 -p 20 -C -M 0.75 Fananassa.genome.fa > Fananassa.ltrfinder.scn &
+
   nohup gt -j 48 ltrharvest -index Fananassa.genome.fa -similar 75 -seqids yes -vic 10 -seed 20 -motif tgca -motifmis 1 -minlenltr 100 -maxlenltr 7000 -mintsd 2 -maxtsd 6 > Fananassa.ltrharvest.scn &
+
   nohup LTR_retriever -genome Fananassa.genome.fa -inharvest Fananassa.ltrharvest.scn -infinder Fananassa.ltrfinder.scn -threads 64 2>> error.log &
 
 # 2.Reconstruct the similarity matrix among all the chromosomes
 #The LTR-RT sequences were filtered for the matrix according to the interval of sequence similarity
+
   cat Fananassa.genome.fa.out.*.LAI.LTR.ava.out > Fananassa.genome.fa.out.LAI.LTR.ava.out &
+
   perl ../ClosestLTRMatch.pl Fananassa.genome.fa.out.LAI.LTR.ava.out > Fananassa.genome.fa.out.LAI.LTR.ava.out.closest &
+
   perl ../ClusterProByLTRBlastFull.pl *.genome.fa.out.LAI.LTR.ava.out.closest *.ctl
 
 # 3.Clustering using R packages

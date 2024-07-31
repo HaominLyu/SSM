@@ -13,7 +13,7 @@ Polyploidization has been recognized as a major force in plant evolution. With t
   nohup LTR_retriever -genome Fananassa.genome.fa -inharvest Fananassa.ltrharvest.scn -infinder Fananassa.ltrfinder.scn -threads 64 2>> error.log &
 
 # 2.Reconstruct the similarity matrix among all the chromosomes
-#The LTR-RT sequences were filtered for the matrix according to the interval of sequence similarity
+#The LTR-RT sequences were filtered for the matrix according to the interval of sequence similarity.
 
   cat Fananassa.genome.fa.out.*.LAI.LTR.ava.out > Fananassa.genome.fa.out.LAI.LTR.ava.out &
 
@@ -22,4 +22,52 @@ Polyploidization has been recognized as a major force in plant evolution. With t
   perl ../ClusterProByLTRBlastFull.pl *.genome.fa.out.LAI.LTR.ava.out.closest *.ctl
 
 # 3.Clustering using R packages
-  
+#Run in Run using Fragaria x ananassa as an example:
+
+library(pvclust)
+
+library(MASS)
+
+
+#Read similarity matrix
+
+data1=read.table("Fananassa.SML.90.To.95.proportion",header=T,row.names=1)
+
+
+#Clustering from correlation using pvclust
+
+set.seed(123)
+
+res.pv1 = parPvclust(cl=NULL, data1, method.hclust = "average", method.dist = "correlation", nboot = 1000, iseed = NULL)
+
+clusters1 <- pvpick(res.pv1)
+
+
+#MDS clustering
+
+d1 = dist(data1) # euclidean distances between the rows
+
+fit1 = isoMDS(d1, k=3) # k is the number of dim
+
+x1 = fit1$points[,1]
+
+y1 = fit1$points[,2]
+
+z1 = fit1$points[,3]
+
+
+#Drawing clustering figures
+
+par(mfcol=c(2,2))
+
+plot(res.pv1, print.pv=T, hang = -1, cex = 0.8, main = "pvclust (90,95)", print.num=TRUE)
+
+pvrect(res.pv1,alpha=0.99)
+
+plot(y1, x1, xlab="Coordinate 1", ylab="Coordinate 2",  main="NomMetric MDS (1,2)", pch=19)
+
+text(y1, x1, labels = row.names(data2), cex=.7)
+
+plot(z1, y1, xlab="Coordinate 2", ylab="Coordinate 3",  main="NomMetric MDS (2,3)", pch=19)
+
+text(z1, y1, labels = row.names(data1), cex=.7)

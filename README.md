@@ -6,9 +6,9 @@ Polyploidization has been recognized as a major force in plant evolution. With t
 
   nohup gt suffixerator -db Fananassa.genome.fa -indexname Fananassa.genome.fa -tis -suf -lcp -des -ssp -sds -dna &
 
-  nohup ltr_finder -D 15000 -d 1000 -L 7000 -l 100 -p 20 -C -M 0.75 Fananassa.genome.fa > Fananassa.ltrfinder.scn &
+  nohup ltr_finder -D 15000 -d 1000 -L 7000 -l 100 -p 20 -C -M 0.8 Fananassa.genome.fa > Fananassa.ltrfinder.scn &
 
-  nohup gt -j 48 ltrharvest -index Fananassa.genome.fa -similar 75 -seqids yes -vic 10 -seed 20 -motif tgca -motifmis 1 -minlenltr 100 -maxlenltr 7000 -mintsd 2 -maxtsd 6 > Fananassa.ltrharvest.scn &
+  nohup gt -j 48 ltrharvest -index Fananassa.genome.fa -similar 80 -seqids yes -vic 10 -seed 20 -motif tgca -motifmis 1 -minlenltr 100 -maxlenltr 7000 -mintsd 2 -maxtsd 6 > Fananassa.ltrharvest.scn &
 
   nohup LTR_retriever -genome Fananassa.genome.fa -inharvest Fananassa.ltrharvest.scn -infinder Fananassa.ltrfinder.scn -threads 64 2>> error.log &
 

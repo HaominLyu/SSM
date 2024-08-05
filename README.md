@@ -13,13 +13,13 @@ Polyploidization has been recognized as a major force in plant evolution. With t
   nohup LTR_retriever -genome Fananassa.genome.fa -inharvest Fananassa.ltrharvest.scn -infinder Fananassa.ltrfinder.scn -threads 64 2>> error.log &
 
 # 2.Reconstruct the similarity matrix among all the chromosomes
-#The LTR-RT sequences were filtered for the matrix according to the interval of sequence similarity.
+#The LTR-RT sequences were filtered for the matrix according to the interval of sequence similarity. The SSM.ctl file contains the pairs of similarity intervals and chromosome names for matrix.
 
   cat Fananassa.genome.fa.out.*.LAI.LTR.ava.out > Fananassa.genome.fa.out.LAI.LTR.ava.out &
 
-  perl ../ClosestLTRMatch.pl Fananassa.genome.fa.out.LAI.LTR.ava.out > Fananassa.genome.fa.out.LAI.LTR.ava.out.closest &
+  perl ClosestLTRMatch.pl Fananassa.genome.fa.out.LAI.LTR.ava.out > Fananassa.genome.fa.out.LAI.LTR.ava.out.closest &
 
-  perl ../ClusterProByLTRBlastFull.pl *.genome.fa.out.LAI.LTR.ava.out.closest *.ctl
+  perl ClusterProByLTRBlastFull.pl Fananassa.genome.fa.out.LAI.LTR.ava.out.closest SSM.ctl
 
 # 3.Clustering using R packages
 #Run in Run using Fragaria x ananassa as an example:

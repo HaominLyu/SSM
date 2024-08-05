@@ -55,7 +55,7 @@ my $outhead = join("\t",@allchr);
 
 
 for my $outident (keys %count) {
-	open OUT,">>","SSM.$outident.proportion" or die;
+	open OUT,">>","SML.$outident.proportion" or die;
 	print OUT "\t$outhead\n";
 	for my $outchr1 (@allchr) {
 		print OUT "$outchr1";

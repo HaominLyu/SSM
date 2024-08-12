@@ -19,7 +19,7 @@ Polyploidization has been recognized as a major force in plant evolution. With t
 
   perl ClosestLTRMatch.pl Fananassa.genome.fa.out.LAI.LTR.ava.out > Fananassa.genome.fa.out.LAI.LTR.ava.out.closest &
 
-  perl ClusterProByLTRBlastFull.pl Fananassa.genome.fa.out.LAI.LTR.ava.out.closest SSM.ctl
+  perl ClusterProByLTRBlastFull.pl SSM.ctl Fananassa.genome.fa.out.LAI.LTR.ava.out.closest
 
 # 3.Clustering using R packages
 #Run in Run using Fragaria x ananassa as an example:

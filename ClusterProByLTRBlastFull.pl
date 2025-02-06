@@ -1,6 +1,7 @@
 #!perl -w
 use strict;
 
+# perl this_code.pl SSM.ctl *.genome.fa.out.LAI.LTR.ava.out.closest
 
 open CTL,"<","$ARGV[0]" or die;
 my (@uplimit, @downlimit, @chrline);

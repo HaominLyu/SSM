@@ -1,6 +1,7 @@
 #!perl -w
 use strict;
 
+# perl this_code.pl *.genome.fa.out.LAI.LTR.ava.out > *.genome.fa.out.LAI.LTR.ava.out.closest
 
 my %done;
 while (<>) {
